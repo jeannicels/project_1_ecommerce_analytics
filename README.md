@@ -1,27 +1,28 @@
 # Brazilian E-Commerce Sales & Customer Analytics
 
 An end-to-end data analytics portfolio project using the Brazilian
-E-Commerce Public Dataset by Olist. The project explores sales
+E-Commerce Public Dataset by Olist. This project explores sales
 performance, customer purchasing behaviour, product categories, payment
 methods, and delivery performance using Python, PostgreSQL, SQL, and
 Power BI.
 
 ## Project Overview
 
-This project transforms raw e-commerce transaction data into
-analysis-ready datasets, performs exploratory and SQL-based analysis,
-and presents business insights through a Power BI dashboard.
+The goal of this project is to transform raw e-commerce transaction data
+into actionable business insights through data exploration, data
+preparation, SQL analysis, and dashboard development.
 
-### Objectives
+### Business Questions
 
--   Analyse sales and revenue performance.
--   Understand customer purchasing behaviour and repeat purchases.
--   Identify high-performing product categories.
--   Examine payment methods and installment behaviour.
--   Evaluate delivery duration and late delivery patterns.
--   Communicate findings through a business intelligence dashboard.
+-   How does product revenue change over time?
+-   Which product categories generate the most revenue?
+-   How frequently do customers make repeat purchases?
+-   Which payment methods are most commonly used?
+-   How long does delivery take, and how often are orders delivered
+    late?
+-   What is the distribution of orders across order statuses?
 
-## Dashboard Preview
+## Dashboard
 
 The Power BI dashboard includes:
 
@@ -33,24 +34,24 @@ The Power BI dashboard includes:
 -   Orders by Status
 -   Monthly Sales Overview
 
-**Power BI dashboard:**
+**Power BI file:**
 [`dashboard/Brazilian_Ecommerce_Analytics.pbix`](dashboard/Brazilian_Ecommerce_Analytics.pbix)\
-**Dashboard PDF:**
+**PDF preview:**
 [`dashboard/Brazilian_Ecommerce_Analytics.pdf`](dashboard/Brazilian_Ecommerce_Analytics.pdf)
 
-The `.pbix` file can be opened with Power BI Desktop. The PDF provides a
-static preview of the dashboard.
+Open the `.pbix` file with Power BI Desktop. The PDF provides a static
+view of the dashboard.
 
 ## Tools & Technologies
 
   Tool               Purpose
-  ------------------ -----------------------------------------
+  ------------------ -----------------------------------------------
   Python             Data exploration and preparation
-  Pandas             Data cleaning and transformation
-  Jupyter Notebook   Exploratory data analysis
-  PostgreSQL         Relational database management
-  SQL                Business analysis and validation
-  Power BI           Dashboard development and visualization
+  Pandas             Data manipulation and cleaning
+  Jupyter Notebook   Exploratory analysis and preparation workflow
+  PostgreSQL         Relational database
+  SQL                Business analysis and data validation
+  Power BI           Dashboard and data visualization
 
 ## Dataset
 
@@ -58,89 +59,70 @@ static preview of the dashboard.
 Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
 
 The dataset contains approximately 100,000 orders from 2016 to 2018 and
-several related datasets.
+multiple related tables, including customers, orders, order items,
+payments, reviews, products, sellers, geolocation, and product category
+translations.
 
-  -----------------------------------------------------------------------
-  Dataset                             Description
-  ----------------------------------- -----------------------------------
-  Customers                           Customer identifiers and location
-                                      information
-
-  Orders                              Order status and timestamps
-
-  Order Items                         Products, prices, and freight
-                                      values
-
-  Payments                            Payment types, values, and
-                                      installments
-
-  Reviews                             Customer review scores and comments
-
-  Products                            Product information and categories
-
-  Sellers                             Seller information
-
-  Geolocation                         Brazilian zip code coordinates
-
-  Category Translation                Portuguese-to-English product
-                                      category mapping
-  -----------------------------------------------------------------------
+The raw dataset is not included in this repository. Download it from
+Kaggle and place the CSV files in the expected local `data/` directory
+before reproducing the analysis.
 
 ## Project Workflow
 
 ### 1. Exploratory Data Analysis
 
-Notebook: `notebook/01_data_exploration.ipynb`
+Notebook:
+[`notebook/01_data_exploration.ipynb`](notebook/01_data_exploration.ipynb)
 
-Explored the dataset to identify patterns and understand the business
-context.
+Explored the dataset to understand its structure, identify data quality
+issues, and investigate:
 
-Analysis areas: - Sales and monthly revenue trends - Customer purchase
-frequency and repeat purchases - Geographic distribution of customers -
-Product category performance - Payment method distribution - Credit card
-installment behaviour - Delivery performance
+-   Sales and monthly revenue trends
+-   Customer purchase frequency and repeat purchases
+-   Geographic distribution of customers
+-   Product category performance
+-   Payment method distribution and installment behaviour
+-   Delivery duration and late delivery patterns
 
 ### 2. Data Preparation & Cleaning
 
-Notebook: `notebook/02_data_preparation.ipynb`
+Notebook:
+[`notebook/02_data_preparation.ipynb`](notebook/02_data_preparation.ipynb)
 
 Prepared analysis-ready datasets for PostgreSQL and Power BI.
 
-Key preparation steps: - Inspected missing values and duplicate
-records. - Converted timestamp columns to datetime format. - Preserved
-missing timestamps and optional review comments. - Standardised missing
-product categories as `unknown`. - Removed exact duplicate geolocation
-records. - Validated key relationships between datasets. - Exported
-cleaned datasets to `data/processed/`.
-
-Raw source CSV files are kept separately in `data/`.
+Key steps included: - Inspecting missing values and duplicate records -
+Converting timestamp columns to datetime format - Preserving missing
+timestamps and optional review comments - Standardising missing product
+categories as `unknown` - Removing exact duplicate geolocation records -
+Validating key relationships between datasets - Exporting cleaned
+datasets to `data/processed/`
 
 ### 3. PostgreSQL & SQL Analysis
 
-Loaded the prepared datasets into PostgreSQL and performed
-business-focused analysis.
+The prepared datasets were loaded into PostgreSQL for business-focused
+analysis.
 
-  -----------------------------------------------------------------------
-  SQL File                            Analysis
-  ----------------------------------- -----------------------------------
-  `sql/01_revenue_analysis.sql`       Revenue, monthly trends, and
-                                      revenue breakdown
+  ------------------------------------------------------------------------------------------------
+  SQL File                                                     Analysis
+  ------------------------------------------------------------ -----------------------------------
+  [`01_revenue_analysis.sql`](sql/01_revenue_analysis.sql)     Revenue, monthly trends, and
+                                                               revenue breakdown
 
-  `sql/02_customer_analysis.sql`      Customer purchase frequency and
-                                      repeat purchase rate
+  [`02_customer_analysis.sql`](sql/02_customer_analysis.sql)   Customer purchase frequency and
+                                                               repeat purchase rate
 
-  `sql/03_product_analysis.sql`       Product category performance
+  [`03_product_analysis.sql`](sql/03_product_analysis.sql)     Product category performance
 
-  `sql/04_payment_analysis.sql`       Payment methods, installments, and
-                                      payment reconciliation
+  [`04_payment_analysis.sql`](sql/04_payment_analysis.sql)     Payment methods, installments, and
+                                                               payment reconciliation
 
-  `sql/05_delivery_analysis.sql`      Delivery duration and late delivery
-                                      performance
-  -----------------------------------------------------------------------
+  [`05_delivery_analysis.sql`](sql/05_delivery_analysis.sql)   Delivery duration and late delivery
+                                                               performance
+  ------------------------------------------------------------------------------------------------
 
-SQL techniques include: - JOINs - GROUP BY and aggregate functions -
-Common Table Expressions (CTEs) - Subqueries - Conditional aggregation -
-Window functions
+SQL techniques include JOINs, GROUP BY, aggregate functions, CTEs,
+subqueries, conditional aggregation, and window functions.
 
 ## Key Findings
 
@@ -149,15 +131,12 @@ Window functions
 -   Dashboard total product revenue: approximately **R\$13.59 million**.
 -   Total orders: **99,441**.
 -   Dashboard Average Order Value: **R\$136.68**.
--   Monthly product revenue increased substantially during 2017 and
-    remained at a higher level through much of 2018.
 
 ### Customer Behaviour
 
 -   Repeat purchase rate was approximately **3%**.
--   The customer base was heavily dominated by one-time purchasers.
--   This suggests an opportunity to improve retention through loyalty
-    initiatives and targeted promotions.
+-   The customer base was dominated by one-time purchasers, indicating
+    an opportunity to improve customer retention.
 
 ### Product Category Performance
 
@@ -191,10 +170,9 @@ Window functions
 -   **Late Delivery:** An order where the actual customer delivery
     timestamp is later than the estimated delivery timestamp.
 
-**Important:** The Power BI dashboard includes all order items, while
-some SQL revenue analyses focus only on delivered orders. Their revenue
-and AOV figures therefore use different scopes and should not be
-compared directly.
+**Important:** The dashboard includes all order items, while some SQL
+revenue analyses focus only on delivered orders. Their revenue and AOV
+figures use different scopes and should not be compared directly.
 
 ## Repository Structure
 
@@ -212,11 +190,8 @@ project_1_ecommerce_analytics/
 │   ├── 03_product_analysis.sql
 │   ├── 04_payment_analysis.sql
 │   └── 05_delivery_analysis.sql
-├── project brief/
-├── data/
-│   └── processed/
-├── README.md
-└── .gitignore
+├── .gitignore
+└── README.md
 ```
 
 ## How to Run
@@ -244,34 +219,33 @@ pip install pandas numpy matplotlib seaborn jupyter
 ### 3. Download the dataset
 
 Download the [Olist Brazilian E-Commerce dataset from
-Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) and
-place the original CSV files inside the `data/` directory, following the
+Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce).
+Place the source CSV files in the local `data/` directory using the
 filenames expected by the notebooks.
 
 ### 4. Run the notebooks
 
-Run the notebooks in order:
+Run these notebooks in order:
 
 1.  `notebook/01_data_exploration.ipynb`
 2.  `notebook/02_data_preparation.ipynb`
 
 ### 5. Set up PostgreSQL
 
-Create a database:
+Create the database:
 
 ``` sql
 CREATE DATABASE olist_commerce;
 ```
 
-Import the processed CSV files into PostgreSQL, configure the required
-table relationships, and then run the SQL scripts in the `sql/`
-directory.
+Import the prepared CSV files into PostgreSQL, configure the required
+table relationships, and run the SQL scripts in the `sql/` directory.
 
 ### 6. Open the Power BI dashboard
 
 Open `dashboard/Brazilian_Ecommerce_Analytics.pbix` in Power BI Desktop.
 Update the PostgreSQL connection settings if your local database
-configuration is different.
+configuration differs.
 
 ## Business Recommendations
 
@@ -286,8 +260,6 @@ configuration is different.
 4.  **Improve delivery operations:** Investigate late delivery patterns
     across states and identify opportunities to improve logistics
     performance.
-5.  **Strengthen regional strategy:** Use customer concentration and
-    delivery performance findings to inform regional planning.
 
 ## Limitations
 
